@@ -16,8 +16,6 @@ Auth::routes();
 
 Route::get("/", "PostController@index")->name('top');
 
-// postsに関するリソースルーティングを行い、
-// PostControllerの各アクションに紐づける
 Route::resource('posts', 'PostController');
 
 
