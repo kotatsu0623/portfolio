@@ -1,0 +1,17 @@
+.header_nav {
+  display: flex;
+  list-style: none;
+  justify-content: right;
+  padding-left: 0;
+}
+.header_nav li {
+  margin-right: 30px;
+}
+/* エラーメッセージ用のスタイル */
+.error {
+  color: red;
+}
+/* 成功メッセージ用のスタイル */
+.success {
+  color: green;
+}
