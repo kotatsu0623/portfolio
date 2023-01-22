@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\PostEditRequest;
 use App\User;
 
 
@@ -92,7 +93,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
      // 投稿更新処理
-    public function update(Request $request, $id)
+    public function update(PostEditRequest $request, $id)
     {
         $post = Post::find($id);
         $post->update($request->only(['comment']));

@@ -4,6 +4,7 @@
  
 @section('content')
   <h1>{{ $title }}</h1>
+  
   <ul>
       @forelse($posts as $post)
             <li>

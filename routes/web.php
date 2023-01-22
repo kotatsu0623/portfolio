@@ -16,8 +16,11 @@ Auth::routes();
 
 Route::get("/", "PostController@index")->name('top');
 
-// postsに関するリソースルーティングを行い、
-// PostControllerの各アクションに紐づける
 Route::resource('posts', 'PostController');
 
+Route::resource('follows', 'FollowController')->only([
+  'index', 'store', 'destroy'
+]);
+ 
+Route::get('/follower', 'FollowController@followerIndex');
 
