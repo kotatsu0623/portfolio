@@ -18,4 +18,9 @@ Route::get("/", "PostController@index")->name('top');
 
 Route::resource('posts', 'PostController');
 
+Route::resource('follows', 'FollowController')->only([
+  'index', 'store', 'destroy'
+]);
+ 
+Route::get('/follower', 'FollowController@followerIndex');
 
