@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
+use App\Follow;
  
 class FollowController extends Controller
 {
     // フォロー一覧
     public function index()
     {
+        $follow_users = \Auth::user()->follow_users;
         return view('follows.index', [
           'title' => 'フォロー一覧',
+          'follow_users' => $follow_users,
         ]);
     }
  

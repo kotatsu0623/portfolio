@@ -45,4 +45,10 @@ class User extends Authenticatable
       $result = $this->follow_users->pluck('id')->contains($user->id);
       return $result;
     }
+    
+    public function scopeRecommend($query, $self_id){
+        return $query->where('id', '!=', $self_id)->latest()->limit(3);
+    }
+    
+   
 }

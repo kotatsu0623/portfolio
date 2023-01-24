@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\PostEditRequest;
 use App\User;
+use App\Follow;
 
 
 class PostController extends Controller
@@ -18,10 +19,17 @@ class PostController extends Controller
      */
      // 投稿一覧
     public function index(){
-        $posts = \Auth::user()->posts;
+        $user = \Auth::user();
+        $user_id = \Auth::id();
+        $follow_user_ids = $user->follow_users->pluck('id');
+        $user_posts = $user->posts()->orWhereIn('user_id', $follow_user_ids )->latest()->paginate(5);
+        $unfollow_users = User::whereNotIn('id' , $follow_user_ids)->where('id' , '!=' , $user->id)->inRandomOrder()->limit(3)->get();
         return view('posts.index', [
             'title' => '投稿一覧',
-            'posts' => $posts,
+            'posts' => $user_posts, 
+            'user' => $user,
+            'user_id' => $user_id,
+            'unfollow_users' => $unfollow_users,
         ]);
     }
 
@@ -140,6 +148,14 @@ class PostController extends Controller
             \Session::flash('success', 'いいねしました');
         }
         return redirect('/posts');
+    }
+    
+    private function currentUser(){
+      $user_id = session()->get('user_id');
+      if($user_id === null){
+        return null;
+      }
+      return User::find($user_id);
     }
     
 }

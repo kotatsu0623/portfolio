@@ -15,3 +15,6 @@
 .success {
   color: green;
 }
+.follow {
+  cursor: pointer;
+}
