@@ -18,18 +18,26 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
      // 投稿一覧
-    public function index(){
+    public function index(Request $request){
         $user = \Auth::user();
         $user_id = \Auth::id();
         $follow_user_ids = $user->follow_users->pluck('id');
         $user_posts = $user->posts()->orWhereIn('user_id', $follow_user_ids )->latest()->paginate(5);
         $unfollow_users = User::whereNotIn('id' , $follow_user_ids)->where('id' , '!=' , $user->id)->inRandomOrder()->limit(3)->get();
+        $keyword = $request->input('keyword');
+        /* $query = Post::query();
+        if(!empty($keyword))
+        {
+            $query->where('comment','like','%'.$keyword.'%');
+        }
+        $keyword_posts = $query->dd($query->toSql());    //get();*/
         return view('posts.index', [
             'title' => '投稿一覧',
             'posts' => $user_posts, 
             'user' => $user,
             'user_id' => $user_id,
             'unfollow_users' => $unfollow_users,
+            'keyword' => $keyword,
         ]);
     }
 
@@ -70,11 +78,27 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function serch(Request $request)
     {
-        return view('posts.show', [
-           'title' => '投稿詳細', 
-        ]);
+        $user_id = \Auth::id();
+        $keyword = $request->input('keyword');
+        $query = Post::query();
+        
+        if(!empty($keyword)) {
+            $query->where('comment', 'LIKE', "%{$keyword}%");
+            $query->where('user_id' , '!=' , $user_id);
+            $posts = $query->get();
+            return view('posts.serch', [
+                'title' => '検索結果一覧', 
+                'posts' => $posts,
+                'keyword' => $keyword,
+                'user_id' => $user_id,
+            ]);
+        }
+        else {
+            return redirect('/posts');
+        }
+        
     }
 
     /**
