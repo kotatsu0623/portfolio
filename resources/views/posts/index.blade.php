@@ -5,7 +5,7 @@
 @section('content')
   <h1>{{ $title }}</h1>
   <div>
-    <form action="{{ route('posts.serch') }}" method="GET">
+    <form action="{{ route('posts.index') }}" method="GET">
       <input type="text" name="keyword" value="{{ $keyword }}">
       <input type="submit" value="検索">
     </form>
@@ -49,5 +49,5 @@
           <li>投稿がありません。</li>
       @endforelse
   </ul>
-  {!! $posts->appends(['keyword'=>$keyword])->render() !!}
+  
 @endsection
