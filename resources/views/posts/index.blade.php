@@ -4,6 +4,12 @@
  
 @section('content')
   <h1>{{ $title }}</h1>
+  <div>
+    <form action="{{ route('posts.index') }}" method="GET">
+      <input type="text" name="keyword" value="{{ $keyword }}">
+      <input type="submit" value="検索">
+    </form>
+  </div>
   <ul class="recommend_users">
     @forelse($unfollow_users as $unfollow_user)
       <li>
@@ -43,4 +49,5 @@
           <li>投稿がありません。</li>
       @endforelse
   </ul>
+  
 @endsection
