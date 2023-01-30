@@ -10,6 +10,11 @@
           </a>
         </li>
         <li>
+            <a href="{{ route('users.show', Auth::user()) }}">
+                マイユーザー詳細
+            </a>
+        </li>
+        <li>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <input type="submit" value="ログアウト">
