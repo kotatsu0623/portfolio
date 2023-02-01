@@ -18,3 +18,16 @@
 .follow {
   cursor: pointer;
 }
+
+h1 a {
+  color: black;
+  text-decoration: none;
+}
+
+.recommend_users {
+  list-style: none;
+}
+
+.posts_list {
+  list-style: none;
+}

@@ -8,9 +8,9 @@
       @csrf
       @method('patch')
       <div>
-          <label>
-            コメント:
-            <input type="text" name="comment" value="{{ $post->comment }}">
+          <label for="comment">
+            コメント:<br>
+            <textarea name="comment" cols="20" rows="10">{{ $post->comment }}</textarea>
           </label>
       </div>
  
