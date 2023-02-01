@@ -9,7 +9,9 @@
       <input type="text" name="keyword" value="{{ $keyword }}">
       <input type="submit" value="検索">
     </form>
+  
   </div>
+  <h2>おすすめユーザー</h2>
   <ul class="recommend_users">
     @forelse($unfollow_users as $unfollow_user)
       <li>
@@ -32,10 +34,11 @@
       <li>おすすめユーザーはいません。</li>
     @endforelse
   </ul>
-  <ul>
+  <h2>タイムライン</h2>
+  <ul class="posts_list">
       @forelse($posts as $post)
             <li>
-              {{ $post->comment }} 投稿者:{{ $post->user->name }} ({{ $post->created_at }})
+              {{ $post->comment }} 投稿者:<a href="{{ route('users.show', $post->user_id) }}">{{ $post->user->name }}</a> ({{ $post->created_at }})
               @if ($user_id === $post->user_id)
                 [<a href="{{ route('posts.edit', $post) }}">編集</a>]
                     <form class="delete" method="post" action="{{ route('posts.destroy', $post) }}">

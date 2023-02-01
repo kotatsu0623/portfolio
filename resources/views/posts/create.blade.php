@@ -7,9 +7,9 @@
   <form method="POST" action="{{ route('posts.store') }}">
       @csrf
       <div>
-          <label>
-            コメント:
-            <input type="text" name="comment">
+          <label for="comment">
+            コメント:<br>
+            <textarea name="comment" cols="20" rows="10"></textarea>
           </label>
       </div>
  
