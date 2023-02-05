@@ -22,7 +22,7 @@
             @endif
         @endif
     @endif
-  <ul>
+  <ul class="posts_list">
       @forelse($posts as $post)
           <li>{{ $post->comment }} ({{ $post->created_at }})</li>
       @empty
