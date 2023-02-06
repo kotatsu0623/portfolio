@@ -22,11 +22,11 @@
             @endif
         @endif
     @endif
-  <ul class="posts_list">
+  <div>
       @forelse($posts as $post)
           <li>{{ $post->comment }} ({{ $post->created_at }})</li>
       @empty
           <li>書き込みはありません。</li>
       @endforelse
-  </ul>
+  </div>
 @endsection
