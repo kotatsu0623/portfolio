@@ -9,7 +9,7 @@
       <input type="text" name="keyword" value="{{ $keyword }}">
       <input type="submit" value="検索">
     </form>
-  //
+  
   </div>
   <h2>おすすめユーザー</h2>
   <ul class="recommend_users">
